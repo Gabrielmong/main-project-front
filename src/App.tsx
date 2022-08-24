@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { CreateReview } from "./Components/Reviews/CreateReview";
 import { EditReview } from "./Components/Reviews/EditReview";
