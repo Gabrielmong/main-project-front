@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from "react-router-dom";
 
 export const Update = (props) => {
@@ -42,10 +43,11 @@ export const Update = (props) => {
     };
     const response = await fetch("/userCrud", requestOptions);
     const data = await response.text();
+    toast.success(data, { autoClose: true });
     if (data === "User updated!") {
       sessionStorage.clear();
       setTimeout(function () {
-        window.location.href = "/";
+        navigate("/profile");
       }, 3000);
     }
   }
@@ -178,14 +180,13 @@ export const Update = (props) => {
         <button
           onClick={handleSignin}
           type="button"
-          className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="mt-10 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_brown"
         >
           Save
         </button>
       </div>
 
       <div className="flex justify-center items-center">
-        <p id="messageCreate"></p>
       </div>
     </div>
   );

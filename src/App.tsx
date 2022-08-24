@@ -16,6 +16,8 @@ import { DishesPage } from "./Views/Optional/DishesPage";
 import { DrinksPage } from "./Views/Optional/DrinksPage";
 import { Navbar } from "./Components/Generalized/Navbar";
 import { Footer } from "./Components/Generalized/Footer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App: FC = () => {
   const [user, setUser] = React.useState<any>(null);
@@ -33,6 +35,16 @@ export const App: FC = () => {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer
+          position="bottom-right"
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+        />
         <Navbar user={user} />
         <Routes>
           <Route path="/" element={<Home user={user} />} />

@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export const Signin = (props) => {
   const navigate = useNavigate();
@@ -6,7 +7,7 @@ export const Signin = (props) => {
   async function handleSignin() {
     var data = await setUserlogin();
   }
-  
+
   async function setUserlogin() {
     let userName = document.getElementById("userName").value;
     let password = document.getElementById("password").value;
@@ -14,7 +15,7 @@ export const Signin = (props) => {
     let apellido = document.getElementById("apellidoIn").value;
     let correo = document.getElementById("correoIn").value;
     let telefono = document.getElementById("telefonoIn").value;
-  
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,19 +28,18 @@ export const Signin = (props) => {
         telefono: telefono,
       }),
     };
-  
+
     const response = await fetch("/userCrud", requestOptions);
     const data = await response.text();
-    document.getElementById("messageCreate").innerHTML = data;
-  
+
+    toast.success(data, { autoClose: true });
     setTimeout(function () {
-      document.getElementById("messageCreate").innerHTML = "";
       if (data === "User added!") {
         navigate("/login");
       }
     }, 3000);
   }
-  
+
   return (
     <div className="bg-em_white shadow px-4 py-5 sm:rounded-lg sm:p-6 h-screen">
       <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -162,9 +162,7 @@ export const Signin = (props) => {
       </div>
 
       <div className="flex justify-center items-center">
-        <p id="messageCreate"></p>
       </div>
     </div>
   );
 };
-

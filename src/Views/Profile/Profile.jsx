@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from "react-router-dom";
 
 export const Profile = (props) => {
@@ -22,8 +23,12 @@ export const Profile = (props) => {
   };
   
   const handleLogout = () => {
-    props.handleLogout();
-    navigate("/");
+    toast.success("Logged out.", { autoClose: true });
+    setTimeout(function () {
+      props.handleLogout();
+      navigate("/");
+    }, 3000);
+    
   };
   
   const handleUpdate = () => {

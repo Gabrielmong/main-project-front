@@ -1,16 +1,20 @@
 import UserProfile from "../../Components/UserData/UserProfile";
 import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/images/empanada.png";
+import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 
 export const Login = (props) => {
   let navigate = useNavigate();
 
   async function handleLogin() {
-    document.getElementById("message").innerHTML = "";
     var data = await getUserlogin();
-    props.handleLogin(data);
-    navigate("/profile");
+    console.log(data);
+    if (data) {
+      props.handleLogin(data);
+      navigate("/profile");
+    }
+    
   }
 
   async function getUserlogin() {
@@ -21,11 +25,10 @@ export const Login = (props) => {
     );
     const data = await response.text();
     if (data === "User not found" || data === "Missing required fields") {
-      document.getElementById("message").innerHTML = data;
-      setTimeout(function () {
-        document.getElementById("message").innerHTML = "";
-      }, 3000);
+      toast.error(data, { autoClose: true });
+      return false;
     } else {
+      toast.success('Logged In', { autoClose: true });
       return JSON.parse(data);
     }
   }
@@ -38,10 +41,6 @@ export const Login = (props) => {
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Log In
           </h2>
-          <h4
-            id="message"
-            className="mt-1 text-center text-2x1 font-semibold text-red-600"
-          ></h4>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

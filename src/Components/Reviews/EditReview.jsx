@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import { Preview } from "../Preview";
 
 const revId = window.location.pathname.split("/")[2];
@@ -10,14 +11,19 @@ export const EditReview = (props) => {
 
   const navigate = useNavigate();
 
+  const discard = () => {
+    navigate(-1);
+  }
+
   useEffect(() => {
-    if (!isReady) {
-      getReview();
-    }
     if (props.user === null) {
       navigate("/403");
       return;
     }
+    setTimeout(function () {
+      getReview();
+
+    }, 150);
   }, [isReady]);
 
   const [file, setFile] = useState(null);
@@ -84,10 +90,9 @@ export const EditReview = (props) => {
     const response = await fetch("/loneReview", requestOptions);
     const data = await response.text();
 
-    document.getElementById("messageCreate").innerHTML = data;
+    toast.success(data, { autoClose: true });
 
     setTimeout(function () {
-      document.getElementById("messageCreate").innerHTML = "";
       if (data === "Review edited!") {
         navigate("/reviews");
       }
@@ -159,7 +164,7 @@ export const EditReview = (props) => {
                         name="ratingIn"
                         id="ratingIn"
                         autoComplete="family-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-md border-gray-300 rounded-md"
+                        className="mt-1 focus:ring-em_orange focus:border-em_orange block w-full shadow-sm sm:text-md border-em_orange rounded-md"
                       >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -183,7 +188,7 @@ export const EditReview = (props) => {
                       id="reviewIn"
                       name="reviewIn"
                       rows={10}
-                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                      className="shadow-sm focus:ring-em_orange focus:border-em_orange mt-1 block w-full sm:text-sm border border-em_orange rounded-md"
                       defaultValue={""}
                       maxLength={1000}
                       onChange={charCounter}
@@ -195,12 +200,18 @@ export const EditReview = (props) => {
                   <p className="mt-5 text-sm text-gray-500">Changed opinion?</p>
                 </div>
               </div>
-              <p id="messageCreate" />
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <button
+                  onClick={discard}
+                  type="button"
+                  className="left-0 mr-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_brown_hover"
+                >
+                  Discard
+                </button>
                 <button
                   onClick={editReview}
                   type="button"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-em_orange hover:bg-em_orange_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_orange_hover"
                 >
                   Save
                 </button>

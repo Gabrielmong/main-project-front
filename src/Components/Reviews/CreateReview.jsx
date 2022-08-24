@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import { Preview } from "../Preview";
 
 export const CreateReview = (props) => {
@@ -8,6 +9,7 @@ export const CreateReview = (props) => {
   const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
+  const [scold, setScold] = useState();
   const onInputChange = (event) => {
     setFile(event.target.files[0]);
     var fileName = event.target.files[0].name;
@@ -15,6 +17,10 @@ export const CreateReview = (props) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
+    if (!document.getElementById("restauranteIn").value) return toast.error("You have to type in a restaurant", { autoClose: true }); 
+    if (!document.getElementById("ubicacionIn").value) return toast.error("You have to type in a location, stop trying us", { autoClose: true });
+    if (!document.getElementById("reviewIn").value) return toast.error("You have to type in a review, jesus, get it right", { autoClose: true });
+    if (!file) return toast.error("Please select a file, there's no escape", { autoClose: true });
     const formData = new FormData();
     var fileName = file.name;
     formData.append("file", file);
@@ -61,10 +67,9 @@ export const CreateReview = (props) => {
     };
     const response = await fetch("/crudReviews", requestOptions);
     const data = await response.text();
-    document.getElementById("messageCreate").innerHTML = data;
+    toast.success(data, { autoClose: true });
 
     setTimeout(function () {
-      document.getElementById("messageCreate").innerHTML = "";
       if (data === "Review created!") {
         navigate("/reviews");
       }
@@ -121,7 +126,7 @@ export const CreateReview = (props) => {
                         type="text"
                         name="restauranteIn"
                         id="restauranteIn"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                        className="focus:ring-em_orange focus:border-em_orange flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-em_orange"
                       />
                     </div>
                   </div>
@@ -141,7 +146,7 @@ export const CreateReview = (props) => {
                         name="ubicacionIn"
                         id="ubicacionIn"
                         autoComplete="given-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 focus:ring-em_orange focus:border-em_orange block w-full shadow-sm sm:text-sm border-em_orange rounded-md"
                       />
                     </div>
 
@@ -156,7 +161,7 @@ export const CreateReview = (props) => {
                         name="ratingIn"
                         id="ratingIn"
                         autoComplete="family-name"
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        className="mt-1 focus:ring-em_orange focus:border-em_orange block w-full shadow-sm sm:text-sm border-em_orange rounded-md"
                       >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -180,7 +185,7 @@ export const CreateReview = (props) => {
                       id="reviewIn"
                       name="reviewIn"
                       rows={10}
-                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                      className="shadow-sm focus:ring-em_orange focus:border-em_orange mt-1 block w-full sm:text-sm border border-em_orange rounded-md"
                       defaultValue={""}
                       maxLength={1000}
                       onChange={charCounter}
@@ -230,8 +235,6 @@ export const CreateReview = (props) => {
                               hidden
                             />
                           </div>
-
-                          <p id="messageCreate" />
                         </div>
                       </div>
                     </label>

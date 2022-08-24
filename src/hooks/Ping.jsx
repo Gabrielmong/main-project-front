@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 
 const Ping = (props) => {
   const [pingIndex, setPingIndex] = useState(0);
@@ -44,8 +45,7 @@ const Ping = (props) => {
 
   const setPingIndicator = (time) => {
     const index=Math.floor(Math.random() * 10);
-    document.getElementsByClassName("pingButton")[0].innerHTML =
-      pingStringArr[1][pingIndex] + " " + time + "ms";
+    toast.success(pingStringArr[1][pingIndex]+" "+time+" ms", { autoClose: 1000 });
     setTimeout(() => {
       setPingIndex(index);
       document.getElementsByClassName("pingButton")[0].innerHTML =

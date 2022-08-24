@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "./reviews.css";
 
 export const FullReview = (props) => {
@@ -30,10 +31,11 @@ export const FullReview = (props) => {
         fileName: fileName,
       }),
     };
+    
 
     const response = await fetch("/loneReview", requestOptions);
     const data = await response.text();
-    document.getElementById("messageRev").innerHTML = data;
+    toast.success(data, { autoClose: true });
     setTimeout(function () {
       navigate("/reviews");
     }, 3000);
@@ -156,7 +158,6 @@ export const FullReview = (props) => {
           >
             Delete
           </button>
-          <p id="messageRev"></p>
           <Link
             type="button"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-yellow-600 hover:bg-em_yellow_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_yellow"
