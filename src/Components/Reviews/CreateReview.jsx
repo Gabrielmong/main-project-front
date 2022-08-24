@@ -59,7 +59,6 @@ export const CreateReview = (props) => {
         fileName: fileName,
       }),
     };
-    console.log(requestOptions);
     const response = await fetch("/crudReviews", requestOptions);
     const data = await response.text();
     document.getElementById("messageCreate").innerHTML = data;

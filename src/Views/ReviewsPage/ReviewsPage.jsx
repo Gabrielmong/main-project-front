@@ -8,10 +8,6 @@ export const ReviewsPage = (props) => {
     getAllReviews();
   }, []);
 
-  useEffect(() => {
-    console.log(reviews);
-  }, [reviews]);
-
   function htmlToElement(html) {
     var template = document.createElement("template");
     html = html.trim(); // Never return a text node of whitespace as the result
@@ -49,29 +45,29 @@ export const ReviewsPage = (props) => {
           )}
         </div>
         <div id="cards" className="cards">
-          {reviews.map((review) => (
+          {reviews.map((review, key) =>  ( 
             <div className="card">
-              <div class="card--image">
+              <div className="card--image">
                 <img
                   src={import.meta.env.VITE_IMG_URL + review[8]}
                   alt=""
                   width="200px"
                 />
               </div>
-              <div class="anotherContainer">
-                <div class="card--content">
-                  <h3 class="card--content--title">{review[1]}</h3>
-                  <div class="yetanotherContainer">
-                    <div class="card--location">
-                      <p class="card--content--location">{review[7]}</p>
+              <div className="anotherContainer">
+                <div className="card--content">
+                  <h3 className="card--content--title">{review[1].replace("&#39", "'")}</h3>
+                  <div className="yetanotherContainer">
+                    <div className="card--location">
+                      <p className="card--content--location">{review[7]}</p>
                     </div>
 
-                    <p class="card--content--author">{review[2]}</p>
+                    <p className="card--content--author">{review[2]}</p>
                   </div>
-                  <p class="card--content--date">{review[5].slice(0, 10)}</p>
+                  <p className="card--content--date">{review[5].slice(0, 10)}</p>
                 </div>
-                <div class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_brown">
-                  <Link class="card--action" to={"/Review/"+review[0]}>
+                <div className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_brown">
+                  <Link className="card--action" to={"/Review/"+review[0]}>
                     See
                   </Link>
                 </div>

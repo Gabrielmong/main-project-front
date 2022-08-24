@@ -9,9 +9,7 @@ export const Login = (props) => {
   async function handleLogin() {
     document.getElementById("message").innerHTML = "";
     var data = await getUserlogin();
-    console.log(data);
     props.handleLogin(data);
-    console.log("login", props.user);
     navigate("/profile");
   }
 

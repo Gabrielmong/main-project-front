@@ -6,16 +6,20 @@ import { Preview } from "../Preview";
 const revId = window.location.pathname.split("/")[2];
 
 export const EditReview = (props) => {
+  const [isReady, setIsReady] = useState(false);
 
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isReady) {
+      getReview();
+    }
     if (props.user === null) {
       navigate("/403");
       return;
     }
-    getReview();
-  }, []);
+  }, [isReady]);
+
   const [file, setFile] = useState(null);
   const onInputChange = (event) => {
     setFile(event.target.files[0]);
@@ -26,6 +30,25 @@ export const EditReview = (props) => {
   function setName(file) {
     document.getElementById("fileName").innerHTML = file;
   }
+
+  const charCounter = (event) => {
+    let review = document.getElementById("reviewIn").value;
+    let charCount = review.length;
+    let charLeft = 1000 - charCount;
+
+    if (charCount > 800 && charCount < 900) {
+      document.getElementById("charLeft").style.color = "orange";
+    } else if (charCount > 900) {
+      document.getElementById("charLeft").style.color = "red";
+    } else {
+      document.getElementById("charLeft").style.color = "black";
+    }
+
+    document.getElementById("charLeft").innerHTML = charLeft;
+    if (charCount == 1000) {
+      document.getElementById("charLeft").innerHTML = "Stop typing jesus";
+    }
+  };
 
   async function getReview() {
     const requestOptions = {
@@ -39,6 +62,7 @@ export const EditReview = (props) => {
     document.getElementById("ratingIn").value = data[0][3];
     document.getElementById("ubicacionIn").innerHTML = data[0][7];
     document.getElementById("reviewIn").value = data[0][4].replace("&#39", "'");
+    setIsReady(true);
   }
 
   async function editReview() {
@@ -162,9 +186,13 @@ export const EditReview = (props) => {
                       className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                       defaultValue={""}
                       maxLength={1000}
+                      onChange={charCounter}
                     />
                   </div>
-                  <p className="mt-2 text-sm text-gray-500">Changed opinion?</p>
+                  <div className="mt-1 text-sm text-gray-600 absolute right-11">
+                    <span id="charLeft">1000</span> / 1000
+                  </div>
+                  <p className="mt-5 text-sm text-gray-500">Changed opinion?</p>
                 </div>
               </div>
               <p id="messageCreate" />

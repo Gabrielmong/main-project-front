@@ -5,7 +5,6 @@ export const Profile = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(props.user);
     if (props.user == null) {
       navigate("/403");
       return;

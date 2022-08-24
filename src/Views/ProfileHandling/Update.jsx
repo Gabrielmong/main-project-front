@@ -51,7 +51,6 @@ export const Update = (props) => {
   }
 
   const fillInfo = () => {
-    console.log(props.user);
     document.getElementById("userName").value = props.user[0][2];
     document.getElementById("password").value = props.user[0][1];
     document.getElementById("nameIn").value = props.user[0][3];
