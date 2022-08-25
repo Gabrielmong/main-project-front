@@ -6,9 +6,12 @@ export const NotFound = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-5/6 flex flex-center justify-center flex-col">
         <div className="text-center">
           <p className="mb-5 text-4xl font-extrabold text-em_brown sm:text-5xl sm:tracking-tight lg:text-6xl">
-          How did you end up here?
+            How did you end up here?
           </p>
-          <Link to="/" className="mt-1 text-base font-semibold text-em_orange tracking-wide uppercase">
+          <Link
+            to="/"
+            className="mt-1 text-base font-semibold text-em_orange tracking-wide uppercase"
+          >
             Go back to the home page
           </Link>
         </div>

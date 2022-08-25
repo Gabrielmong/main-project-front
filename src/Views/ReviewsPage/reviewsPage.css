@@ -92,6 +92,10 @@ h1 {
     align-self: center;
 }
 
+.card--image img {
+    border-radius: 10px;
+}
+
 .card--content--location {
     letter-spacing: 1.5px;
     width: fit-content;

@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/empanada.png";
 
 const navigation = [
-  { name: "Home", href: "/" },
   { name: "Reviews", href: "/Reviews" },
   { name: "Dishes", href: "/Dishes" },
   { name: "Drinks", href: "/Drinks" },
 ];
-
 
 export const Navbar = (props) => {
   return (
@@ -20,7 +18,7 @@ export const Navbar = (props) => {
               <img className="h-10 w-auto" src={logo} alt="Empanadas Review" />
             </Link>
             <Link to="/" className="font-semibold text-em_white ml-3">
-              <span  className="hidden md:inline-block">Empanadas Review</span>
+              <span className="hidden md:inline-block">Empanadas Review</span>
             </Link>
             <div className="hidden ml-10 space-x-8 lg:block">
               {navigation.map((link) => (

@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from 'react-toastify';
-import { Preview } from "../Preview";
-
-const revId = window.location.pathname.split("/")[2];
+import { toast } from "react-toastify";
 
 export const EditReview = (props) => {
+  const revId = window.location.pathname.split("/")[2];
   const [isReady, setIsReady] = useState(false);
-
   const navigate = useNavigate();
 
   const discard = () => {
     navigate(-1);
-  }
+  };
 
   useEffect(() => {
     if (props.user === null) {
       navigate("/403");
       return;
     }
-    setTimeout(function () {
-      getReview();
-
-    }, 150);
+    getReview();
   }, [isReady]);
 
   const [file, setFile] = useState(null);
@@ -37,7 +30,7 @@ export const EditReview = (props) => {
     document.getElementById("fileName").innerHTML = file;
   }
 
-  const charCounter = (event) => {
+  const charCounter = () => {
     let review = document.getElementById("reviewIn").value;
     let charCount = review.length;
     let charLeft = 1000 - charCount;
@@ -49,7 +42,6 @@ export const EditReview = (props) => {
     } else {
       document.getElementById("charLeft").style.color = "black";
     }
-
     document.getElementById("charLeft").innerHTML = charLeft;
     if (charCount == 1000) {
       document.getElementById("charLeft").innerHTML = "Stop typing jesus";
@@ -89,6 +81,9 @@ export const EditReview = (props) => {
 
     const response = await fetch("/loneReview", requestOptions);
     const data = await response.text();
+
+    if (data === "Missing required fields")
+      return toast.error(data, { autoClose: true });
 
     toast.success(data, { autoClose: true });
 

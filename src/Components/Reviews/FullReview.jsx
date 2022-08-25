@@ -83,7 +83,7 @@ export const FullReview = (props) => {
             ></h3>
 
             <h3
-              className="mt-2 text-3xl leading-8 font-bold tracking-tight text-gray-900 sm:text-4xl sm:tracking-tight"
+              className="mt-2 text-3xl leading-8 font-bold tracking-tight text-em_brown sm:text-4xl sm:tracking-tight"
               id="rating"
             ></h3>
           </div>

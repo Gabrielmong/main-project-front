@@ -77,7 +77,7 @@ export const App: FC = () => {
             path="/Signin"
             element={<Signin user={user} handleLogin={handleLogin} />}
           />
-          <Route path="/Update" element={<Update user={user} />} />
+          <Route path="/Update" element={<Update user={user} handleLogout={handleLogout}/>} />
           <Route path="/Dishes" element={<DishesPage />} />
           <Route path="/Drinks" element={<DrinksPage />} />
           <Route path="/403" element={<Forbidden />} />

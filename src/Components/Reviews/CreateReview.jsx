@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import { Preview } from "../Preview";
+import { toast } from "react-toastify";
 
 export const CreateReview = (props) => {
-  
   const navigate = useNavigate();
-
   const [file, setFile] = useState(null);
-  const [scold, setScold] = useState();
+
   const onInputChange = (event) => {
     setFile(event.target.files[0]);
-    var fileName = event.target.files[0].name;
   };
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    if (!document.getElementById("restauranteIn").value) return toast.error("You have to type in a restaurant", { autoClose: true }); 
-    if (!document.getElementById("ubicacionIn").value) return toast.error("You have to type in a location, stop trying us", { autoClose: true });
-    if (!document.getElementById("reviewIn").value) return toast.error("You have to type in a review, jesus, get it right", { autoClose: true });
-    if (!file) return toast.error("Please select a file, there's no escape", { autoClose: true });
+    if (!document.getElementById("restauranteIn").value)
+      return toast.error("You have to type in a restaurant", {
+        autoClose: true,
+      });
+    if (!document.getElementById("ubicacionIn").value)
+      return toast.error("You have to type in a location, stop trying us", {
+        autoClose: true,
+      });
+    if (!document.getElementById("reviewIn").value)
+      return toast.error("You have to type in a review, jesus, get it right", {
+        autoClose: true,
+      });
+    if (!file)
+      return toast.error("Please select a file, there's no escape", {
+        autoClose: true,
+      });
     const formData = new FormData();
-    var fileName = file.name;
     formData.append("file", file);
     axios
       .post("/uploadImg", formData)
@@ -37,7 +44,8 @@ export const CreateReview = (props) => {
     if (!props.user) {
       navigate("/403");
     }
-  }), [];
+  }),
+    [];
 
   async function createReview() {
     let restaurante = document
@@ -76,7 +84,7 @@ export const CreateReview = (props) => {
     }, 3000);
   }
 
-  const charCounter = (event) => {
+  const charCounter = () => {
     let review = document.getElementById("reviewIn").value;
     let charCount = review.length;
     let charLeft = 1000 - charCount;
@@ -88,11 +96,9 @@ export const CreateReview = (props) => {
     } else {
       document.getElementById("charLeft").style.color = "black";
     }
-
     document.getElementById("charLeft").innerHTML = charLeft;
     if (charCount == 1000) {
       document.getElementById("charLeft").innerHTML = "Stop typing jesus";
-
     }
   };
 
@@ -126,7 +132,7 @@ export const CreateReview = (props) => {
                         type="text"
                         name="restauranteIn"
                         id="restauranteIn"
-                        className="focus:ring-em_orange focus:border-em_orange flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-em_orange"
+                        className="focus:ring-em_orange focus:border-em_orange flex-1 block w-full rounded-md sm:text-sm border-em_orange"
                       />
                     </div>
                   </div>
@@ -211,7 +217,7 @@ export const CreateReview = (props) => {
                       <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                         <div className="space-y-1 text-center">
                           <svg
-                            className="mx-auto h-12 w-12 text-gray-400"
+                            className="mx-auto h-12 w-12 text-em_orange"
                             stroke="currentColor"
                             fill="none"
                             viewBox="0 0 48 48"
@@ -245,7 +251,7 @@ export const CreateReview = (props) => {
                 <button
                   onClick={onFormSubmit}
                   type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-em_brown hover:bg-em_brown_hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-em_brown"
                 >
                   Save
                 </button>
