@@ -10,7 +10,7 @@ const stats = [
 export const About = () => {
   return (
     <>
-      <div className="relative bg-white py-5 sm:py-6 h-fc">
+      <div className="relative bg-em_white py-5 sm:py-6 h-fc">
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start pb-10">
           <div className="relative sm:py-16 lg:py-0">
             <div
@@ -97,9 +97,9 @@ export const About = () => {
                 </p>
                 <p className="text-base leading-7">
                   Each member has a different skillset, Lucía knows lots of security and databases, 
-                  Esteban has a great understanding of documentation and user interfaces, Caleb has 
+                  Esteban has a great understanding of documentation and user interfaces, Bradley has 
                   extensive knowledge in security, and Gabriel handles the code's logic, or 
-                  infrastructure. Gabriel also manages the team very well. 
+                  infrastructure. He also manages the team very well. 
                 </p>
                 <p className="text-base leading-7">
                   Met in the second quarter of 2021, and since, developing and maintaining the

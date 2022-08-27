@@ -51,7 +51,6 @@ export const Update = (props) => {
   }
 
   async function setUserlogin() {
-    console.log(props.user);
     let indUser = props.user[0][2];
     let indPassword = props.user[0][1];
     let userName = document.getElementById("userName").value;
@@ -79,7 +78,6 @@ export const Update = (props) => {
     const data = await response.text();
     toast.success(data, { autoClose: true });
     if (data === "User updated!") {
-      sessionStorage.clear();
       setTimeout(function () {
         props.handleLogout();
         navigate("/Login");

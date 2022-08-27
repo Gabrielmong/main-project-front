@@ -83,7 +83,6 @@ export const App: FC = () => {
           <Route path="/403" element={<Forbidden />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-
         <Footer />
       </BrowserRouter>
     </>

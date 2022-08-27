@@ -9,7 +9,7 @@ export const FullReview = (props) => {
   const [idReview, setIdReview] = useState();
   const [owner, setOwner] = useState();
   const [editable, setEditable] = useState(false);
-
+  
   useEffect(() => {
     getReview();
     if (props.user) {
@@ -65,6 +65,7 @@ export const FullReview = (props) => {
     if (data[0][6] !== null) {
       document.getElementById("edited").hidden = false;
     }
+
   }
   return (
     <div className="bg-em_white overflow-hidden h-full min-h-screen">

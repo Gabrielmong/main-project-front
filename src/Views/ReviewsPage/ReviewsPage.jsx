@@ -4,6 +4,7 @@ import "./reviewsPage.css";
 
 export const ReviewsPage = (props) => {
   const [reviews, setReviews] = useState([]);
+  
   useEffect(() => {
     getAllReviews();
   }, []);
